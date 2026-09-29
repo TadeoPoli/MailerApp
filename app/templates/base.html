@@ -1,25 +1,32 @@
-<!DOCTYPE html>
-<title>{% block title %} {% endblock %} - Mailer</title>
-<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}"
-<link rel="preconnect" href="https://fonts.googleapis.com"> 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Rufina:wght@400;600&display=swap" rel="stylesheet">
-<nav>
-    Mail<b>er</b>
-</nav>
-<section class="content">
-    <div class="top-bar">
-        <form method="GET">
-            <input name="search" type="text" placeholder="Quieres buscar algo" />
-        </form>
-        {% block action %} {% endblock %}
-    </div>
-    <header>
-        {% block header %} {% endblock %}
-    </header>
-    {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }} </div>
-    {% endfor %}
-    {% block content %} {% endblock %}
-</section>
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %} - Mailer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Rufina:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav><a href="{{ url_for('mail.index') }}">Mail<b>er</b></a></nav>
+    <main class="content">
+        <div class="top-bar">
+            <form method="get" action="{{ url_for('mail.index') }}" role="search">
+                <label class="visually-hidden" for="search">Buscar contenido</label>
+                <input name="search" id="search" type="search" value="{{ search|default('') }}" maxlength="100" placeholder="Buscar en el contenido">
+            </form>
+            {% block action %}{% endblock %}
+        </div>
+        <header>
+            {% block header %}{% endblock %}
+        </header>
+        {% for message in get_flashed_messages() %}
+            <div class="flash" role="status">{{ message }}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
 

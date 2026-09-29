@@ -12,16 +12,16 @@
 {% block content %}
 <ul>
     {% for mail in mails %}
-    
-    <li class="mail">
-        <div>
-            <span class="email">{{mail['email'] }}</span>
-            <span class="subject">{{mail['subject']}}</span>
-            <hr>
-            <p class="mail-content">{{mail['content']}}</p>
-        </div>
-    </li>
-    
+        <li class="mail">
+            <div>
+                <span class="email">{{ mail['email'] }}</span>
+                <span class="subject">{{ mail['subject'] }}</span>
+                <hr>
+                <p class="mail-content">{{ mail['content'] }}</p>
+            </div>
+        </li>
+    {% else %}
+        <li class="mail">No se encontraron correos.</li>
     {% endfor %}
 </ul>
 {% endblock %}

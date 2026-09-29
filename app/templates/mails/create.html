@@ -15,17 +15,18 @@
 {% block content %}
 
 <form method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <div class="form-group">
-        <label form="email">Correo</label>
-        <input name="email" type="text" id="email" />
+        <label for="email">Correo</label>
+        <input name="email" type="email" id="email" value="{{ email|default('') }}" maxlength="254" autocomplete="email" required>
     </div>
     <div class="form-group">
-        <label form="subject">Asunto</label>
-        <input name="subject" type="text" id="subject" />
+        <label for="subject">Asunto</label>
+        <input name="subject" type="text" id="subject" value="{{ subject|default('') }}" maxlength="200" required>
     </div>
     <div class="form-group">
-        <label form="content">Contenido</label>
-        <textarea name="content" id="content"></textarea>
+        <label for="content">Contenido</label>
+        <textarea name="content" id="content" maxlength="5000" required>{{ content|default('') }}</textarea>
     </div>
     <div class="form-group">
         <button class="button">Enviar</button>
