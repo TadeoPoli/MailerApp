@@ -1,11 +1,12 @@
 instructions = [
-    'DROP TABLE IF EXISTS email;',
     """
-      CREATE TABLE email (
+      CREATE TABLE IF NOT EXISTS email (
          id INT PRIMARY KEY AUTO_INCREMENT,
-         email TEXT NOT NULL,
-         subject TEXT NOT NULL,
-         content TEXT NOT NULL    
-      )
+         email VARCHAR(254) NOT NULL,
+         subject VARCHAR(200) NOT NULL,
+         content TEXT NOT NULL,
+         created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+         INDEX idx_email_created_at (created_at)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
     """
 ]
